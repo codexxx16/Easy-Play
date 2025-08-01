@@ -34,6 +34,7 @@ function prevTrack() {}
 function nextTrack() {}
 function shuffle() {}
 function repeat() {}
+
 async function handleSearch() {
   const query = document.getElementById("searchInput").value.trim();
   if (!query) return;
@@ -63,7 +64,9 @@ async function handleSearch() {
           <p>Duration: ${item.duration}</p>
           <div class="card-buttons">
             <button onclick="playMedia('${item.url}', '${item.title.replace(/'/g, "\\'")}')">▶️ Play</button>
-            <a href="https://api.siputzx.my.id/api/d/ytmp3?url=${item.url}" target="_blank">⬇️ Download MP3</a>
+            <a href="https://api.siputzx.my.id/api/d/ytmp3?url=${item.url}" target="_blank">⬇️ MP3</a>
+            <button onclick="addToPlaylist('${item.url}', '${item.title.replace(/'/g, "\\'")}')">➕ Playlist</button>
+            <button onclick="addToFavorites('${item.url}', '${item.title.replace(/'/g, "\\'")}')">❤️ Fav</button>
           </div>
         </div>
       `;
@@ -75,6 +78,7 @@ async function handleSearch() {
     resultsContainer.innerHTML = `<p>Error fetching results. Try again.</p>`;
   }
 }
+
 function playMedia(videoUrl, title) {
   const fullPlayer = document.getElementById("fullPlayer");
   const preview = document.getElementById("mediaPreview");
@@ -89,3 +93,14 @@ function playMedia(videoUrl, title) {
   preview.play();
   document.getElementById("miniTitle").textContent = title;
 }
+
+// NEW: Playlist and Favorites
+function addToPlaylist(url, title) {
+  alert(`Added to Playlist: ${title}`);
+  // You can push to a real playlist array or localStorage here
+}
+
+function addToFavorites(url, title) {
+  alert(`❤️ Favorited: ${title}`);
+  // You can push to a favorites list here
+  }
