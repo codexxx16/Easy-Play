@@ -104,3 +104,53 @@ function addToFavorites(url, title) {
   alert(`❤️ Favorited: ${title}`);
   // You can push to a favorites list here
   }
+// === Playlist and Favorites System ===
+
+function getStoredList(key) {
+  return JSON.parse(localStorage.getItem(key)) || [];
+}
+
+function saveToList(key, item) {
+  const list = getStoredList(key);
+  if (!list.some(i => i.url === item.url)) {
+    list.push(item);
+    localStorage.setItem(key, JSON.stringify(list));
+    alert(`${item.title} added to ${key}`);
+  } else {
+    alert(`${item.title} is already in ${key}`);
+  }
+}
+
+function addToPlaylist(url, title) {
+  saveToList("easyplay_playlist", { url, title });
+}
+
+function addToFavorites(url, title) {
+  saveToList("easyplay_favorites", { url, title });
+}
+
+function loadList(key, containerId) {
+  const list = getStoredList(key);
+  const container = document.getElementById(containerId);
+  container.innerHTML = "";
+
+  if (list.length === 0) {
+    container.innerHTML = `<p>No items in ${key.replace("easyplay_", "")}</p>`;
+    return;
+  }
+
+  list.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "media-card";
+    div.innerHTML = `
+      <div class="info">
+        <h4>${item.title}</h4>
+        <div class="card-buttons">
+          <button onclick="playMedia('${item.url}', '${item.title.replace(/'/g, "\\'")}')">▶️ Play</button>
+          <a href="https://api.siputzx.my.id/api/d/ytmp3?url=${item.url}" target="_blank">⬇️ MP3</a>
+        </div>
+      </div>
+    `;
+    container.appendChild(div);
+  });
+    }
