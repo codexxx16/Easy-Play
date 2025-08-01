@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("userEmail").textContent = email || "Guest";
   loadList("easyplay_playlist", "playlist");
 loadList("easyplay_favorites", "favorites");
+ updateHistory(title);
 });
 
 // Placeholder media controls
