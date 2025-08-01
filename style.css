@@ -179,3 +179,45 @@ body.dark .history-section {
   border-radius: 5px;
   cursor: pointer;
   }
+.media-card {
+  display: flex;
+  gap: 10px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+body.dark .media-card {
+  background: #1a1a1a;
+}
+.media-card img {
+  width: 120px;
+  height: auto;
+}
+.media-card .info {
+  flex: 1;
+  padding: 10px;
+}
+.media-card .info h4 {
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+.media-card .info p {
+  font-size: 0.9rem;
+  margin: 2px 0;
+}
+.card-buttons {
+  margin-top: 10px;
+}
+.card-buttons button,
+.card-buttons a {
+  padding: 5px 10px;
+  margin-right: 5px;
+  background: #ff3366;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  }
