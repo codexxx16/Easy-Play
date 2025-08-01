@@ -34,8 +34,46 @@ function prevTrack() {}
 function nextTrack() {}
 function shuffle() {}
 function repeat() {}
-function handleSearch() {
-  alert("Searching... (API integration coming next)");
+async function handleSearch() {
+  const query = document.getElementById("searchInput").value.trim();
+  if (!query) return;
+
+  const resultsContainer = document.getElementById("results");
+  resultsContainer.innerHTML = `<p>Loading...</p>`;
+
+  try {
+    const res = await fetch(`https://api.siputzx.my.id/api/s/youtube?q=${encodeURIComponent(query)}`);
+    const data = await res.json();
+
+    if (!data.status || !data.result || data.result.length === 0) {
+      resultsContainer.innerHTML = `<p>No results found.</p>`;
+      return;
+    }
+
+    resultsContainer.innerHTML = "";
+
+    data.result.slice(0, 10).forEach((item) => {
+      const card = document.createElement("div");
+      card.className = "media-card";
+      card.innerHTML = `
+        <img src="${item.thumbnail}" alt="thumb" />
+        <div class="info">
+          <h4 title="${item.title}">${item.title.slice(0, 60)}</h4>
+          <p>By ${item.channel}</p>
+          <p>Duration: ${item.duration}</p>
+          <div class="card-buttons">
+            <button onclick="playMedia('${item.url}', '${item.title.replace(/'/g, "\\'")}')">▶️ Play</button>
+            <a href="https://api.siputzx.my.id/api/d/ytmp3?url=${item.url}" target="_blank">⬇️ Download MP3</a>
+          </div>
+        </div>
+      `;
+      resultsContainer.appendChild(card);
+    });
+
+    updateHistory(query);
+  } catch (err) {
+    resultsContainer.innerHTML = `<p>Error fetching results. Try again.</p>`;
+  }
 }
 function playMedia(videoUrl, title) {
   const fullPlayer = document.getElementById("fullPlayer");
