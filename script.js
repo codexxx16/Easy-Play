@@ -37,3 +37,17 @@ function repeat() {}
 function handleSearch() {
   alert("Searching... (API integration coming next)");
 }
+function playMedia(videoUrl, title) {
+  const fullPlayer = document.getElementById("fullPlayer");
+  const preview = document.getElementById("mediaPreview");
+  const titleEl = document.getElementById("mediaTitle");
+  const downloadBtn = document.getElementById("downloadBtn");
+
+  titleEl.textContent = title;
+  preview.src = videoUrl;
+  downloadBtn.href = `https://api.siputzx.my.id/api/d/ytmp3?url=${videoUrl}`;
+
+  fullPlayer.style.display = "block";
+  preview.play();
+  document.getElementById("miniTitle").textContent = title;
+}
