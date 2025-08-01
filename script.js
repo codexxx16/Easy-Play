@@ -96,6 +96,33 @@ function playMedia(videoUrl, title) {
   document.getElementById("miniTitle").textContent = title;
 }
 
+function updateHistory(title) {
+  const history = JSON.parse(localStorage.getItem("easyplay_history") || "[]");
+
+  const newEntry = {
+    title: title,
+    time: new Date().toLocaleString()
+  };
+
+  const updated = [newEntry, ...history.slice(0, 19)]; // Max 20 items
+  localStorage.setItem("easyplay_history", JSON.stringify(updated));
+
+  renderHistory();
+}
+
+function renderHistory() {
+  const history = JSON.parse(localStorage.getItem("easyplay_history") || "[]");
+  const container = document.getElementById("history");
+  container.innerHTML = "";
+
+  history.forEach((entry) => {
+    const div = document.createElement("div");
+    div.className = "history-item";
+    div.innerHTML = `<strong>${entry.title}</strong><br/><small>${entry.time}</small>`;
+    container.appendChild(div);
+  });
+}
+
 // NEW: Playlist and Favorites
 function addToPlaylist(url, title) {
   alert(`Added to Playlist: ${title}`);
