@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Easy-Play | Player</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body class="light">
+  <!-- Theme Toggle + Menu Icon -->
+  <div class="top-bar">
+    <div class="menu-icon" onclick="toggleMenu()">☰</div>
+    <div class="theme-toggle" onclick="toggleTheme()">🌙</div>
+  </div>
+
+  <!-- Sidebar Menu (Hidden by default) -->
+  <div class="side-menu" id="sideMenu">
+    <h2>Account</h2>
+    <p>Email: <span id="userEmail">-</span></p>
+    <p>Created by Charless Tentacion</p>
+    <button onclick="logout()">Log out</button>
+  </div>
+
+  <!-- Search Section -->
+  <section class="search-section">
+    <input type="text" id="searchInput" placeholder="Search for music or paste YouTube URL..." />
+    <button onclick="handleSearch()">Search</button>
+  </section>
+
+  <!-- Main Content Area -->
+  <main class="content">
+    <div class="media-results" id="results"></div>
+
+    <div class="playlist-section">
+      <h3>Playlist</h3>
+      <ul id="playlist"></ul>
+    </div>
+
+    <div class="favorites-section">
+      <h3>Favorites</h3>
+      <ul id="favorites"></ul>
+    </div>
+
+    <div class="history-section">
+      <h3>History</h3>
+      <ul id="history"></ul>
+    </div>
+  </main>
+
+  <!-- Mini Player -->
+  <div class="mini-player" id="miniPlayer">
+    <span id="miniTitle">No track playing</span>
+    <div>
+      <button onclick="togglePlay()">⏯</button>
+      <button onclick="stopMedia()">⏹</button>
+    </div>
+    <span id="miniTime">00:00</span>
+  </div>
+
+  <!-- Full Player (hidden until media is selected) -->
+  <div class="full-player" id="fullPlayer">
+    <h2 id="mediaTitle">Title</h2>
+    <video id="mediaPreview" controls></video>
+    <div class="controls">
+      <button onclick="prevTrack()">⏮</button>
+      <button onclick="togglePlay()">⏯</button>
+      <button onclick="stopMedia()">⏹</button>
+      <button onclick="nextTrack()">⏭</button>
+      <button onclick="shuffle()">🔀</button>
+      <button onclick="repeat()">🔁</button>
+      <a id="downloadBtn" download target="_blank">⬇️ MP3</a>
+    </div>
+  </div>
+</body>
+      </html>
