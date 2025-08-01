@@ -21,6 +21,8 @@ function logout() {
 document.addEventListener("DOMContentLoaded", () => {
   const email = localStorage.getItem("easyplay_user");
   document.getElementById("userEmail").textContent = email || "Guest";
+  loadList("easyplay_playlist", "playlist");
+loadList("easyplay_favorites", "favorites");
 });
 
 // Placeholder media controls
